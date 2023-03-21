@@ -8,19 +8,20 @@ const router = Router();
 
 passport.use(localStratey)
 
-// passport.serializeUser(function (user,done){
-//     process.nextTick(function(){
-//         done(null, {id: user.id})
-//     })
-// })
+passport.serializeUser(function (user: any ,done){
+    process.nextTick(function(){
+        done(null, {id: user.nombre})
+    })
+})
 
-// passport.deserializeUser(function (user, done){
-//     process.nextTick(function(){
-//         done(null, user)
-//     })
-// })
+passport.deserializeUser(function (user: any, done){
+    process.nextTick(function(){
+        done(null, user)
+    })
+})
 
-router.post("/", passport.authenticate('local', {failureMessage:true})  ,login)
+router.post("/", passport.authenticate('local', {successRedirect: "/home" ,failureMessage:true}))
+// router.post("/"  ,login)
 
 
 export { router }

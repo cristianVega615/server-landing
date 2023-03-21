@@ -9,7 +9,8 @@ interface User  {
     };
     password:string,
     numero: number,
-    pais: string 
+    pais: string;
+    verifyPassword(password: string, hash: string): Promise<boolean>;
 }
 
 interface passportUser extends Express.User {

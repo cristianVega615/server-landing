@@ -8,8 +8,14 @@ const login = async (req: Request , res: Response) => {
     const {email, password} = req.body 
 
     
-        let user = await User.find({email}); 
-        console.log(user)
+        User.findOne({email})
+        .then(async (user) => {
+            console.log(user)
+            let condition = await user?.verifyPassword(password, user.password)
+            console.log(condition)
+
+        }); 
+
     console.log(email, password)
     res.send({data: "Login"})
 }

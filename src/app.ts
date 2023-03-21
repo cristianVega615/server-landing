@@ -10,19 +10,23 @@ import passport from "passport"
 const PORT = process.env.PORT || 3000;
 const app = express()
 
-app.use(cors())
+// app.use(cors())
 app.use(express.json())
-// app.use(
-//     session({
-//         secret: 'keyboard cat',
-//         resave: false,
-//         saveUninitialized: false,
-//         cookie: { secure: true}
-
-//     })
-// )
-// app.use(passport.session())
-
+app.use(
+    session({
+        secret: 'keyboard cat',
+        resave: false,
+        saveUninitialized: false,
+        cookie: { secure: true},
+        
+    })
+)
+app.use(passport.initialize())
+app.use(passport.session())
+app.use((req,res,next) => {
+    res.locals.user = req.user
+    next()
+})
 
 
 app.use("/api", router)
