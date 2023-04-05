@@ -1,26 +1,36 @@
-import { Router } from "express";
-import passport from "passport";
+import { Request, Response, Router } from "express";
+import passport, { DoneCallback } from "passport";
 import { login } from "../controllers/controllersLogin";
 import {localStratey} from '../utils/passport'
-import {User as TypeUser, passportUser} from "../interface/schema"
+import { userParameter} from "../interface/schema"
+import User from "../models/User";
 
 const router = Router();
 
 passport.use(localStratey)
 
-passport.serializeUser(function (user: any ,done){
+passport.serializeUser(function (user: userParameter ,done:DoneCallback){
     process.nextTick(function(){
-        done(null, {id: user.nombre})
+        done(null, {
+            id: user.id,
+            nombre: user.nombre,
+            email: user.email
+        });
+
     })
 })
 
-passport.deserializeUser(function (user: any, done){
+passport.deserializeUser(function (user: userParameter, done:DoneCallback){
     process.nextTick(function(){
-        done(null, user)
+        done(null,user)
     })
 })
 
-router.post("/", passport.authenticate('local', {successRedirect: "/home" ,failureMessage:true}))
+router.post("/", passport.authenticate('local', { failureMessage:true}), (req: Request, res: Response) => {
+    res.send({
+        cookie: req.cookies
+    })
+})
 // router.post("/"  ,login)
 
 

@@ -7,18 +7,18 @@ let localStratey = new Strategy(
     usernameField: "email",
     passwordField: "password",
   },
-  async function ( email, password, done) {
-      
-      try {
-        let user: User | null = await User.findOne(
-        { email });
-    
-        if (!user) {
-            return done(null, false);
-        }
-        if (!user?.verifyPassword(password, user.password)) {
-            return done(null, false);
-        }
+  async function (email, password, done) {
+    let user: User | null = await User.findOne({ email });
+
+    let condition = await user?.verifyPassword(password, user.password);
+    try {
+      if (!user) {
+        return done(null, false);
+      }
+      if (!condition) {
+        return done(null, false);
+      }
+
       return done(null, user);
     } catch (error) {
       return done(error);

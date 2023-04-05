@@ -16,7 +16,6 @@ const login = async (req: Request , res: Response) => {
 
         }); 
 
-    console.log(email, password)
     res.send({data: "Login"})
 }
 

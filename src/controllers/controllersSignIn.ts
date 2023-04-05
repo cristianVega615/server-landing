@@ -10,8 +10,7 @@ const signIn = async (req: Request, res: Response) => {
     let hashPass = await encrypt(password) 
     const user = await User.create({...body, password: hashPass}); 
     
-     
-    res.send({user})
+    res.sendStatus(200)
 }
 
 export {signIn}

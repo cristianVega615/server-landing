@@ -23,7 +23,9 @@
   },
   "dependencies": {
     "-": "^0.0.1",
+    "@types/cookie-parser": "^1.4.3",
     "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "D": "^1.0.0",
     "dotenv": "^16.0.3",

@@ -5,29 +5,30 @@ import cors from 'cors'
 import db from "./config/mongo"
 import session from "express-session"
 import passport from "passport"
+import cookie from 'cookie-parser'
+import cookieParser from "cookie-parser"
 
 
 const PORT = process.env.PORT || 3000;
 const app = express()
 
-// app.use(cors())
+app.use(cookieParser())
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    optionsSuccessStatus: 200,
+    credentials:true
+}))
 app.use(express.json())
 app.use(
     session({
-        secret: 'keyboard cat',
+        secret: "secret",
         resave: false,
         saveUninitialized: false,
-        cookie: { secure: true},
-        
     })
 )
 app.use(passport.initialize())
-app.use(passport.session())
-app.use((req,res,next) => {
-    res.locals.user = req.user
-    next()
-})
-
+app.use(passport.authenticate("session"))
+app.use(express.urlencoded({extended: false}))
 
 app.use("/api", router)
 db().then(() => {

@@ -13,9 +13,15 @@ interface User  {
     verifyPassword(password: string, hash: string): Promise<boolean>;
 }
 
-interface passportUser extends Express.User {
+
+interface Serialize extends Express.User{
     nombre: string;
+    email: string;
+}
+
+interface userParameter extends Express.User{
+    [key:string]: any;
 }
 
 
-export {User, passportUser }
+export {User, userParameter, Serialize}
