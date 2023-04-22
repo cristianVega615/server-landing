@@ -7,6 +7,7 @@ import session from "express-session"
 import passport from "passport"
 import cookie from 'cookie-parser'
 import cookieParser from "cookie-parser"
+import mongoose from "mongoose"
 
 
 const PORT = process.env.PORT || 3000;

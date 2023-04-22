@@ -3,6 +3,6 @@ import {signIn} from '../controllers/controllersSignIn'
 
 const router = Router();
 
-router.get("/", signIn)
+router.post("/", signIn)
 
 export {router}

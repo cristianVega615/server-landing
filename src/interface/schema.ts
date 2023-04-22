@@ -1,6 +1,7 @@
-import { Document } from "mongoose";
+import { Document, ObjectId } from "mongoose";
 
 interface User  {
+    _id: ObjectId
     nombre: string;
     apellido: string;
     email: {
@@ -8,9 +9,24 @@ interface User  {
         unique: true
     };
     password:string,
-    numero: number,
-    pais: string;
+    kindOfRegister: string,
+    providerId: string
     verifyPassword(password: string, hash: string): Promise<boolean>;
+}
+
+interface UserVariable extends Document { 
+    _id: ObjectId
+    nombre: string;
+    apellido: string;
+    email: string;
+    password:string,
+    numero: number,
+}
+
+interface RequestUser  {
+    id: ObjectId;
+    email: unknown;
+    nombre: string;
 }
 
 
@@ -24,4 +40,4 @@ interface userParameter extends Express.User{
 }
 
 
-export {User, userParameter, Serialize}
+export {User, userParameter, Serialize, RequestUser, UserVariable}

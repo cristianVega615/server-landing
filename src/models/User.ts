@@ -10,9 +10,15 @@ const UserSchema = new Schema<User>({
         required: true,
         unique: true,
     },
-    password: String,
-    numero: Number,
-    pais: String
+    password: {
+        type: String,
+        default: ""
+    },
+    kindOfRegister: String,
+    providerId: {
+        type: String,
+        default: ""
+    }
 })
 UserSchema.methods.verifyPassword = async (password: string, hash: string): Promise<boolean> => {
     return await bcrypt.compare(password, hash)
