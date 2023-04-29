@@ -1,14 +1,14 @@
 import { Request, Response, Router } from "express";
 import passport, { DoneCallback } from "passport";
-import { login } from "../controllers/controllersLogin";
 import {localStratey} from '../utils/passport'
 import { userParameter} from "../interface/schema"
-import User from "../models/User";
 
 const router = Router();
 
+//* Estamos usando passport-local para poder usar un login.
 passport.use(localStratey)
 
+//* Aca serializamos y deserializamos para toda la app.
 passport.serializeUser(function (user: userParameter ,done:DoneCallback){
     process.nextTick(function(){
         done(null, {
@@ -26,12 +26,8 @@ passport.deserializeUser(function (user: userParameter, done:DoneCallback){
     })
 })
 
-router.post("/", passport.authenticate('local', { failureMessage:true}), (req: Request, res: Response) => {
-    res.send({
-        cookie: req.cookies
-    })
-})
-// router.post("/"  ,login)
+//*Aca se entra para autentificar los datos.
+router.post("/", passport.authenticate('local', { failureMessage:true}))
 
 
 export { router }

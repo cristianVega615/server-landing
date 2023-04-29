@@ -10,6 +10,10 @@ const cleanFileName = (filename: string) => {
     return file
 }
 
+/**
+ * ! Funcion para crear las rutas dinamicamente
+ */
+
 readdirSync(PATH_ROUTER).filter((filename) => {
     const cleanName = cleanFileName(filename)
     

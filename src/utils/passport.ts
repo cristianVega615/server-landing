@@ -2,6 +2,11 @@ import User from "../models/User";
 import { User as TypeUser } from "../interface/schema";
 import { Strategy } from "passport-local";
 
+/**
+ * * Usamos la estrategia de passport-local para poder verificar si su cuenta esta registrada
+ *  
+ */
+
 let localStratey = new Strategy(
   {
     usernameField: "email",

@@ -6,6 +6,9 @@ import type { RequestUser, UserVariable } from "../interface/schema";
 
 const signIn = async (req: Request, res: Response, next: NextFunction) => {
 
+    //* Controlador para poder hacer una nueva cuenta dentro de mi servidor
+
+
     try {
         const { body } = req
         const {password } = body
